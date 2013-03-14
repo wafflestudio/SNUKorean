@@ -1,0 +1,8 @@
+<% @characters.each do |c| %>
+  <div class="span2 well">
+    <div class="character-shape"><%= c.shape %></div>
+      <div class="character-description">
+        <i class="icon-book"></i> <%= c.meaning %> <i class="icon-volume-up"></i> <%= c.sound %>
+      </div>
+  </div>
+<% end %>

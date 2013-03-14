@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <%= csrf_meta_tags %>
+
+    <title>SNUKorean</title>
+    <link rel="shortcut icon" href="/favicon.png">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <!--[if lt IE 9]>
+    <%= javascript_include_tag 'html5shiv' %><!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div>
+            <%= link_to "SNUKorean", root_path, :class => "brand" %>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li class="active"><%= link_to "Home", root_path %></li>
+                <li><%= link_to "About", about_path %></li>
+                <li><%= link_to "Contact", contact_path %></li>
+              </ul>
+              <div class="pull-right dropdown nav nav-btn">
+                <% if user_signed_in? %>
+                  <a href="#" class="dropdown-toggle btn" data-toggle="dropdown"><i class="icon-user"></i> <%= current_user.email %> <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "<i class=\"icon-pencil\"></i> Take an exam".html_safe, new_quiz_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "<i class=\"icon-cog\"></i> Profile".html_safe, my_profile_path %></li>
+                    <li><%= link_to "<i class=\"icon-file\"></i> Score".html_safe, my_score_path %></li>
+                    <li><%= link_to "<i class=\"icon-globe\"></i> Group".html_safe, my_group_path %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "<i class=\"icon-off\"></i> Sign out".html_safe, destroy_user_session, :method => "delete" %></li>
+                  </ul>
+                <% else %>
+                  <a href="#" class="dropdown-toggle btn" data-toggle="dropdown"><i class="icon-pencil"></i> Take an exam <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li class="nav-header">GUEST MODE</li>
+                    <li><%= link_to "Guest", quizzes_path, :method => "post" %></li>
+                    <li class="divider"></li>
+                    <li class="nav-header">USER MODE</li>
+                    <li><a href="#">mySNU</a></li>
+                    <li><%= link_to "email", new_user_session_path %></li>
+                  </ul>
+                <% end %>
+              </div>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <%= yield %>
+        </div>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
