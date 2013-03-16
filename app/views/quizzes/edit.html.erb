@@ -1,0 +1,30 @@
+<%= form_for(@quiz) do |f| %>
+  <% @quiz.questions.each do |q| %>
+    <%= f.fields_for :questions do |questions_f| %>
+      <% c = q.character %>
+      <div class="span2 well">
+        <div class="character-shape"><%= c.shape %></div>
+        <%= questions_f.hidden_field :id, :value => q.id %>
+        <% q.examples.each_with_index do |e, i| %>
+          <div class="character-description">
+            <label class="inline custom-inline">
+              <%= questions_f.radio_button :answer, e['id'], :checked => (q.answer.to_s == e['id'].to_s) %><i class="icon-book"></i> <%= e['meaning'] %> <i class="icon-volume-up"></i> <%= e['sound'] %>
+            </label>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="span2 well">
+    <div class="character-shape">
+      <%= f.check_box :solved, :value => "true", :checked => true %>
+    </div>
+    <div class="character-description help">
+      <p>[ <i class="icon-hand-up"></i>는 임시저장 여부 ]</p>
+      <p>선택지를 확인해주세요.</p>
+    </div>
+    <div class="character-description">
+      <%= f.submit "제출하기", :class => "btn btn-expand" %>
+    </div>
+  </div>
+<% end %>

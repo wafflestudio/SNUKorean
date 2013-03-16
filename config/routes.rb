@@ -10,7 +10,9 @@ SnuKorean::Application.routes.draw do
   match "/me/group" => "groups#my", :as => "my_group"
 
   ## QUIZ
-  resources :quizzes, :only => [:create, :show, :edit, :update, :destroy]
+  resources :quizzes, :only => [:create, :show, :edit, :update, :destroy] do
+    match "/submit" => "quizzes#submit", :on => :member
+  end
 
   root :to => "main#home"
   match "/about" => "main#about"

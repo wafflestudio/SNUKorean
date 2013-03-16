@@ -22,7 +22,7 @@ div.character-shape {
   text-align: center;
 }
 div.character-description {
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -31,4 +31,19 @@ div.character-description {
     display: block;
     margin-bottom: 5px;
   }
+}
+
+.row-fluid form [class*="span"]:nth-child(2) {
+	margin-left: 0;
+}
+
+.custom-inline input[type=radio] {
+	margin: 0 4px 4px 0;
+}
+
+input.btn-expand {
+	width: 100% !important;
+}
+a.btn-expand {
+	display: block;
 }

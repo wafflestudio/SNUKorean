@@ -4,7 +4,7 @@ class Question
   ## Field
   field :corret, type: Boolean, default: false
   field :examples, type: Hash, default: []
-  field :answer, type: Hash, default: {}
+  field :answer, type: String, default: ""
 
   ## Relation
   belongs_to :quiz
@@ -12,7 +12,6 @@ class Question
 
   ## Validation
   validates :examples, :presence => true
-  validates :answer, :presence => true
 
   validates :quiz, :presence => true
   validates :character, :presence => true

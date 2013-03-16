@@ -13,12 +13,25 @@ class QuizzesController < ApplicationController
 
   def show
     @quiz = Quiz.find(params[:id])
+    unless @quiz.solved
+      redirect_to edit_quiz_path(@quiz)
+    end
   end
 
   def edit
+    @quiz = Quiz.find(params[:id])
+    if @quiz.solved
+      redirect_to quiz_path(@quiz)
+    end
   end
 
   def update
+    @quiz = Quiz.find(params[:id])
+    if @quiz.update_attributes(params[:quiz])
+      redirect_to edit_quiz_path(@quiz)
+    else
+      render "edit"
+    end
   end
 
   def destroy

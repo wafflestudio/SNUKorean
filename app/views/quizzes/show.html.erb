@@ -1,0 +1,27 @@
+<%= form_for(@quiz) do |f| %>
+  <% @quiz.questions.each do |q| %>
+    <%= f.fields_for :questions do |questions_f| %>
+      <% c = q.character %>
+      <div class="span2 well">
+        <div class="character-shape"><%= c.shape %></div>
+        <%= questions_f.hidden_field :id, :value => q.id %>
+        <% q.examples.each_with_index do |e, i| %>
+          <div class="character-description">
+            <label class="inline custom-inline">
+              <%= questions_f.radio_button :answer, e['id'], :checked => (q.answer.to_s == e['id'].to_s) %><i class="icon-book"></i> <%= e['meaning'] %> <i class="icon-volume-up"></i> <%= e['sound'] %>
+            </label>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="span2 well">
+    <div class="character-shape">
+      <%= @quiz.score %>
+    </div>
+    <div class="character-description help">
+      <p>문의 및 제안</p>
+      <p><i class="icon-envelope"></i> <%= link_to "tantara@snu.ac.kr", "mailto:tantara@snu.ac.kr" %></p>
+    </div>
+  </div>
+<% end %>
